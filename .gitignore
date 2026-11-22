@@ -1,0 +1,9 @@
+node_modules/
+.next/
+out/
+public/pim/
+.env
+.env.local
+.env*.local
+*.log
+.DS_Store

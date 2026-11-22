@@ -1,0 +1,19 @@
+{
+  "name": "eilandenvanhainfase1b",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Projectwebsite Eilanden van Hain - Fase 1B, statisch gegenereerd uit een PIM MCP snapshot",
+  "scripts": {
+    "fetch": "node --env-file-if-exists=.env.local scripts/fetch-pim.mjs",
+    "predev": "node scripts/prepare-public.mjs",
+    "dev": "next dev",
+    "prebuild": "node scripts/prepare-public.mjs",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^15.5.4",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  }
+}

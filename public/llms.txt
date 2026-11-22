@@ -1,0 +1,21 @@
+# Eilanden van Hain - Fase 1B (projectwebsite)
+
+> Static project website for AM development project "Eilanden van Hain - Fase 1B"
+> (PIM project id 1409, Krommenie, NL), generated from a snapshot of the AM PIM.
+
+## Pages
+- /            — project overview: key facts, description, photo gallery, house types, location map, brochures/documents
+- /aanbod/     — full offer: all 32 units (bouwnummer) grouped by house type, with price, status, surface, rooms, energy label, floorplan links; filterable/sortable in the browser
+- /404         — not-found page
+
+## Machine-readable data (public, no auth)
+- /pim/snapshot.json — the full PIM snapshot (project, housetypes with nested houses, flat house list) used to build this site. Plain JSON.
+- JSON-LD (schema.org) embedded in every page:
+  - /         — RealEstateListing for the project (geo, price range, availability) + ItemList of house types
+  - /aanbod/  — ItemList of all units (sku = bouwnummer, Offer with price/availability, floorplan url)
+- /sitemap.xml and /robots.txt are served from the root.
+
+## Data source & freshness
+- Source of truth is the AM PIM (Property Information Management). This site is a static snapshot of PIM project 1409; maintainers refresh it with the repository's fetch/build pipeline (see README). No credentials or internal endpoints are published on this site — /pim/snapshot.json is the public read-only view.
+- All prices are EUR, sale condition v.o.n. ("vrij op naam"). Status values are Dutch ("Te Koop", "Optie", "Verkocht") and are mapped to schema.org availability in the JSON-LD (InStock / LimitedAvailability / SoldOut).
+- Images and documents are served from the public PIM CDN (pim-cdn.nieuwbouwdossier.nl).
