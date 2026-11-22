@@ -9,6 +9,7 @@ import {
   imgUrl,
   stripTags,
 } from '../lib/pim';
+import { JsonLd, housetypesJsonLd } from '../lib/jsonld';
 
 const heroImage = project.images?.length ? imgUrl(project.images[0], '2k') || imgUrl(project.images[0], 'original') : null;
 
@@ -28,6 +29,7 @@ export default function HomePage() {
 
   return (
     <>
+      <JsonLd data={housetypesJsonLd(project, housetypes)} />
       <section className="hero">
         {heroImage && <img src={heroImage} alt={project.name} className="hero-img" />}
         <div className="hero-overlay container">

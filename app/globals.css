@@ -39,6 +39,21 @@ a {
   padding: 0 20px;
 }
 
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--accent);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 0 0 8px 0;
+  z-index: 20;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
 .site-header {
   background: var(--teal);
   color: #fff;

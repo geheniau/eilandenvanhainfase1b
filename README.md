@@ -52,6 +52,23 @@ npm run dev                 # lokale ontwikkelmodus
 cd out && python3 -m http.server 8000   # → http://localhost:8000
 ```
 
+## AI-agent support (machineleesbaar)
+
+De site is naast voor mensen ook gebouwd voor AI-agents:
+
+- `public/llms.txt` — descreve de site, pagina's, data-endpoints en de PIM MCP-bron.
+- `public/robots.txt` + `public/sitemap.xml` — crawlen/discovery.
+- `public/pim/snapshot.json` — de volledige PIM-snapshot als ruwe JSON (wordt bij elke
+  `npm run build`/`npm run dev` gekopieerd uit `data/snapshot.json` via `scripts/prepare-public.mjs`).
+- JSON-LD (schema.org) in elke pagina:
+  - `/` — `RealEstateListing` (project: geo, prijsrange, availability) + `ItemList` van woningtypes
+  - `/aanbod/` — `ItemList` van alle woningen (`sku` = bouwnummer, `Offer` met prijs en
+    `availability` gemapt van de PIM-status: Te Koop → InStock, Optie → LimitedAvailability, Verkocht → SoldOut)
+- Semantische HTML: `header/nav/main/footer`, skip-link, `<time>` voor de snapshot-datum, `lang="nl"`, alt-teksten, aria-label op de kaart.
+
+Agents met toegang tot de PIM MCP (`REDACTED-PIM-MCP-URL`) kunnen además live
+data ophalen met `get_project` / `list_housetypes` / `list_houses` (project id 1409).
+
 ## Ander project
 
 Zet `PIM_PROJECT_ID` op een ander project-id (zie `list_projects_summary` in de PIM MCP),

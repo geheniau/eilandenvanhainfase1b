@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /_next/
+
+Sitemap: https://eilandenvanhainfase1b.vercel.app/sitemap.xml

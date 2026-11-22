@@ -5,7 +5,9 @@
   "description": "Projectwebsite Eilanden van Hain - Fase 1B, statisch gegenereerd uit een PIM MCP snapshot",
   "scripts": {
     "fetch": "node --env-file-if-exists=.env.local scripts/fetch-pim.mjs",
+    "predev": "node scripts/prepare-public.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/prepare-public.mjs",
     "build": "next build",
     "start": "next start"
   },

@@ -1,0 +1,23 @@
+# Eilanden van Hain - Fase 1B (projectwebsite)
+
+> Static project website for AM development project "Eilanden van Hain - Fase 1B"
+> (PIM project id 1409, Krommenie, NL), generated from a snapshot of the AM PIM via MCP.
+
+## Pages
+- /            — project overview: key facts, description, photo gallery, house types, location map, brochures/documents
+- /aanbod/     — full offer: all 32 units (bouwnummer) grouped by house type, with price, status, surface, rooms, energy label, floorplan links; filterable/sortable in the browser
+- /404         — not-found page
+
+## Machine-readable data
+- /pim/snapshot.json — the full PIM snapshot (project, housetypes with nested houses, flat house list) used to build this site. JSON, no auth needed.
+- JSON-LD (schema.org) is embedded in every page: RealEstateListing for the project (geo, price range, availability) on /, ItemList of house types on /, ItemList of all units (sku = bouwnummer, Offer with price/availability) on /aanbod/.
+- /sitemap.xml and /robots.txt are served from the root.
+
+## Live data source (for agents that can authenticate)
+- AM PIM MCP server: REDACTED-PIM-MCP-URL (streamable HTTP, Authorization: Bearer <token>)
+- Relevant tools: list_projects, list_projects_summary, get_project (project_id=1409), list_housetypes, get_housetype, list_houses, search_projects, find_house, find_housetype
+- To refresh this site's data: set PIM_MCP_TOKEN (and optionally PIM_MCP_URL / PIM_PROJECT_ID), run `npm run fetch`, then `npm run build` (static export to out/).
+
+## Notes
+- All prices are EUR, sale condition v.o.n. ("vrij op naam"); status values are Dutch ("Te Koop", "Optie", "Verkocht") and mapped to schema.org availability in the JSON-LD.
+- Images/documents are served from the PIM CDN (pim-cdn.nieuwbouwdossier.nl).
