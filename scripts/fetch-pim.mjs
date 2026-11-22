@@ -2,13 +2,13 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
-const MCP_URL = process.env.PIM_MCP_URL || 'REDACTED-PIM-MCP-URL';
+const MCP_URL = process.env.PIM_MCP_URL;
 const TOKEN = process.env.PIM_MCP_TOKEN;
 const PROJECT_ID = Number(process.env.PIM_PROJECT_ID || 1409);
 const OUT_FILE = path.join(process.cwd(), 'data', 'snapshot.json');
 
-if (!TOKEN) {
-  console.error('PIM_MCP_TOKEN ontbreekt. Kopieer .env.example naar .env.local en vul de token in.');
+if (!MCP_URL || !TOKEN) {
+  console.error('PIM_MCP_URL en PIM_MCP_TOKEN ontbreken. Kopieer .env.example naar .env.local en vul beide in (staat bewust niet in de repo).');
   process.exit(1);
 }
 
@@ -80,7 +80,7 @@ async function main() {
   const snapshot = {
     meta: {
       fetchedAt: new Date().toISOString(),
-      mcpUrl: MCP_URL,
+      source: 'AM PIM (via MCP)',
       projectId: PROJECT_ID,
       projectName: project.name,
     },

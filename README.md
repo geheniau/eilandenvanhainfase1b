@@ -1,7 +1,7 @@
 # Eilanden van Hain – Fase 1B (projectwebsite via PIM MCP)
 
 Statische projectwebsite (SSG) voor één AM PIM-project. Alle content wordt bij build-tijd
-opgehaald uit de **AM PIM MCP** (`REDACTED-PIM-MCP-URL`) en vastgelegd in een
+opgehaald uit de **AM PIM MCP** (endpoint via `PIM_MCP_URL` in `.env.local`) en vastgelegd in een
 snapshot (`data/snapshot.json`). De site zelf is volledig statisch (`next build` met
 `output: 'export'` → `out/`) en heeft dus geen runtime-afhankelijkheid van de PIM.
 
@@ -25,7 +25,7 @@ npm install
 
 Kopieer `.env.example` naar `.env.local` en vul in:
 
-- `PIM_MCP_URL` — MCP endpoint (standaard al goed)
+- `PIM_MCP_URL` — MCP endpoint (verplicht; staat bewust niet in de repo, vraag 'm op bij de PIM-beheerder)
 - `PIM_MCP_TOKEN` — Bearer token voor de PIM MCP (**nooit committen**, `.env.local` staat in `.gitignore`)
 - `PIM_PROJECT_ID` — project-id in de PIM (standaard `1409` = Eilanden van Hain - Fase 1B)
 
@@ -66,8 +66,8 @@ De site is naast voor mensen ook gebouwd voor AI-agents:
     `availability` gemapt van de PIM-status: Te Koop → InStock, Optie → LimitedAvailability, Verkocht → SoldOut)
 - Semantische HTML: `header/nav/main/footer`, skip-link, `<time>` voor de snapshot-datum, `lang="nl"`, alt-teksten, aria-label op de kaart.
 
-Agents met toegang tot de PIM MCP (`REDACTED-PIM-MCP-URL`) kunnen además live
-data ophalen met `get_project` / `list_housetypes` / `list_houses` (project id 1409).
+Agents zonder PIM-toegang gebruiken `/pim/snapshot.json`; live PIM-data is alleen beschikbaar
+voor geautoriseerde maintainers via de MCP-connector (project id 1409).
 
 ## Ander project
 
